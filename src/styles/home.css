@@ -1,0 +1,17 @@
+.characterCardList{
+    overflow-y: auto;  
+    white-space: nowrap;  
+}
+
+.card{
+    display: inline-block;
+    height: 400px;
+    width: 300%;
+   
+}
+
+.planetCardList{
+    overflow-x: auto;  
+    white-space: nowrap;  
+}
+
