@@ -4,15 +4,15 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const CharacterCard = (props) => {
+  const { store, actions } = useContext(Context);
     return (
       <div className="card" style={{width: "18rem"}}>
         <img src="http://cdn.pastemagazine.com/www/blogs/lists/starwars.jpg" className="card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">{props.char.name}</h5>
-          <p className="text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+          <div>Gender: {props.char.gender}</div>
+          <div>Weight: {props.char.mass}</div>
+          <div>Birth year{props.char.birth_year}</div>
           <Link
           to={{
             pathname: `/detailscharacter/${props.char.name}`,
@@ -23,7 +23,7 @@ export const CharacterCard = (props) => {
           {" "}
           Go somewhere
         </Link>
-        <button type="button" class="btn btn-outline-danger"><i class="fas fa-heart"></i></button>
+        <button type="button" className="btn btn-outline-danger" onClick={()=>{actions.addToFavorites(props.char.name)}}><i className="fas fa-heart"></i></button>
         </div>
       </div>
     );

@@ -4,16 +4,18 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const PlanetCard = (props) => {
+
+  const { store, actions } = useContext(Context);
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img src="https://wallpaperaccess.com/full/2137903.jpg"  style={{ height: "auto", width: "100%" }}className="card-img-top" alt="..." />
       <div className="card-body">
         <h5 className="card-title">{props.plan.name}</h5>
-        <p className="text">
+       
           <div>Terrain: {props.plan.terrain}</div>
           <div>Surface water: {props.plan.surface_water}</div>
           <div>Population: {props.plan.population}</div>
-        </p>
+       
         <div className="d-flex justify-content-between">
         <Link
           to={{
@@ -25,7 +27,7 @@ export const PlanetCard = (props) => {
           {" "}
           Go somewhere
         </Link>
-        <button type="button" class="btn btn-outline-danger"><i class="fas fa-heart"></i></button>
+        <button type="button" className="btn btn-outline-danger" onClick={()=>{actions.addToFavorites(props.plan.name)}}><i className="fas fa-heart"></i></button>
         </div>
       </div>
     </div>
