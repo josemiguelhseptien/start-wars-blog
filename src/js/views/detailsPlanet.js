@@ -8,7 +8,7 @@ export const DetailsPlanet = (props) => {
 
   return (
     <div className="jumbotron">
-      <div className="imagePlaceHolder d-flex">
+    <div className="imagePlaceHolder d-flex">
         <img
           src="https://wallpaperaccess.com/full/2137903.jpg"
           style={{ height: "300px", width: "400px" }}

@@ -5,7 +5,6 @@ import { Context } from "../store/appContext";
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   return (
-    
     <nav className="navbar navbar-light bg-light mb-3">
       <Link to="/">
         <span className="navbar-brand mb-0 h1">React Boilerplate</span>
@@ -26,11 +25,31 @@ export const Navbar = () => {
           >
             Dropdown button
           </button>
-          
-          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            {store.favorites.map((favorite,index)=>{
-              return(<li key={index}>{favorite}<button className="btn btn-outline-danger" onClick={(e)=>{actions.removeFavorite(favorite,index)}}><i className="fas fa-trash-alt"></i></button></li>)
+
+          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+            {store.favorites.map((favorite, index) => {
+              return (
+                <li key={index}>
+                  <Link
+                    to={{
+                      pathname: `/details${favorite.entity}/${favorite.name}`,
+                      state: favorite,
+                    }}
+                  >
+                    {favorite.name}
+                  </Link>
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={(e) => {
+                      actions.removeFavorite(favorite, index);
+                    }}
+                  >
+                    <i className="fas fa-trash-alt"></i>
+                  </button>
+                </li>
+              );
             })}
+            
           </ul>
         </div>
       </div>

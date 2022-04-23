@@ -27,7 +27,7 @@ export const PlanetCard = (props) => {
           {" "}
           Go somewhere
         </Link>
-        <button type="button" className="btn btn-outline-danger" onClick={()=>{actions.addToFavorites(props.plan.name)}}><i className="fas fa-heart"></i></button>
+        <button type="button" className="btn btn-outline-danger" onClick={(e)=>{actions.addToFavorites(props.plan),actions.preventRepeat(props.plan),actions.getType(props.plan)}} ><i className="fas fa-heart"></i></button>
         </div>
       </div>
     </div>

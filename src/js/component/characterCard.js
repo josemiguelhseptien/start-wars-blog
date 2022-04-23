@@ -23,7 +23,7 @@ export const CharacterCard = (props) => {
           {" "}
           Go somewhere
         </Link>
-        <button type="button" className="btn btn-outline-danger" onClick={()=>{actions.addToFavorites(props.char.name)}}><i className="fas fa-heart"></i></button>
+        <button type="button" className="btn btn-outline-danger" onClick={()=>{actions.addToFavorites(props.char),actions.preventRepeat(props.char),actions.getType(props.char)}}><i className="fas fa-heart"></i></button>
         </div>
       </div>
     );

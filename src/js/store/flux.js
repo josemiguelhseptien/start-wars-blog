@@ -40,17 +40,31 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       addToFavorites: (favorite, index) => {
+    
         const newFavorites = getStore().favorites;
 
-        newFavorites.push(favorite);
-		
+       newFavorites.push(favorite);
+        
         setStore({ favorites: newFavorites });
-		for(values of newFavorites){
-			console.log(values)
-		}
-		console.log(favorite)
-		console.log(newFavorites)
+        
       },
+      preventRepeat:(favorite)=>{
+        const filteredFavorites = getStore().favorites.filter((element)=>{
+          return element===favorite
+        })
+        console.log(filteredFavorites.length)
+        if(filteredFavorites.length>1){
+          getStore().favorites.pop()
+        }
+      },
+
+      getType:(favorite)=>{
+       if(typeof(favorite.gender)=="string"){favorite.entity="character"}
+       else{favorite.entity="planet"};
+        console.log(typeof(favorite.gender));
+        console.log(favorite.entity)
+      },
+      
 
 
       removeFavorite: (favorite, index) => {
@@ -59,6 +73,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         setStore({ favorites: filteredFavorites });
       },
+
+      removeRepeat: (favorite,index) => {
+        const findFavorite = getStore().favorites.find((element) => {
+          return element == favorite;
+        });
+        if(!findFavorite) console.log(findFavorite);
+     
+      } 
+      ,
 
       exampleFunction: () => {
         getActions().changeColor(0, "green");
