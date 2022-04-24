@@ -9,12 +9,61 @@ export const Navbar = () => {
       <Link to="/">
         <span className="navbar-brand mb-0 h1">React Boilerplate</span>
       </Link>
+      <div>
+        <div className="d-flex">
+          <input
+            value={store.userInput}
+            onChange={(e) => {
+              actions.typeFunction(e.target.value);
+            }}
+            className="form-control dropdown-toggle"
+            placeholder="search"
+          />
+
+          <button
+            className="btn btn-outline-secondary"
+            type="button"
+            id="button-addon2"
+            onClick={(e) => {
+              actions.clearSearch(e);
+            }}
+          >
+            <i className="fas fa-backspace"></i>
+          </button>
+        </div>
+        <div>
+          <ul className="list-group dropdown-toggle"
+         
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+            {store.searchBar.map((element, index) => {
+              return (
+                <li
+                  className="list-group-item list-group-item-action"
+                  key={index}
+                  onClick={() => {
+                    <Link
+                      to={{
+                        pathname: `/details${element.entity}/${element.name}`,
+                        state: element,
+                      }}
+                    ></Link>;
+                  }}
+                >
+                  {element.name}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
       <div className="ml-auto">
         <Link to="/demo">
           <button className="btn btn-primary">
             Check the Context in action
           </button>
         </Link>
+
         <div className="dropdown">
           <button
             className="btn btn-secondary dropdown-toggle"
@@ -26,7 +75,7 @@ export const Navbar = () => {
             Dropdown button
           </button>
 
-          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             {store.favorites.map((favorite, index) => {
               return (
                 <li key={index}>
@@ -49,7 +98,6 @@ export const Navbar = () => {
                 </li>
               );
             })}
-            
           </ul>
         </div>
       </div>

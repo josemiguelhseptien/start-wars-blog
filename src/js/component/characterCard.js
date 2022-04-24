@@ -13,6 +13,7 @@ export const CharacterCard = (props) => {
           <div>Gender: {props.char.gender}</div>
           <div>Weight: {props.char.mass}</div>
           <div>Birth year{props.char.birth_year}</div>
+          <div className="d-flex justify-content-between">
           <Link
           to={{
             pathname: `/detailscharacter/${props.char.name}`,
@@ -24,6 +25,7 @@ export const CharacterCard = (props) => {
           Go somewhere
         </Link>
         <button type="button" className="btn btn-outline-danger" onClick={()=>{actions.addToFavorites(props.char),actions.preventRepeat(props.char),actions.getType(props.char)}}><i className="fas fa-heart"></i></button>
+        </div>
         </div>
       </div>
     );

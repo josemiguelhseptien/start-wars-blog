@@ -1,9 +1,14 @@
+import { array } from "prop-types";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       favorites: [],
       people: [],
       planets: [],
+      searchBar: [],
+      userInput: "",
+
       demo: [
         {
           title: "FIRST",
@@ -40,32 +45,49 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       addToFavorites: (favorite, index) => {
-    
         const newFavorites = getStore().favorites;
 
-       newFavorites.push(favorite);
-        
+        newFavorites.push(favorite);
+
         setStore({ favorites: newFavorites });
-        
       },
-      preventRepeat:(favorite)=>{
-        const filteredFavorites = getStore().favorites.filter((element)=>{
-          return element===favorite
-        })
-        console.log(filteredFavorites.length)
-        if(filteredFavorites.length>1){
-          getStore().favorites.pop()
+      preventRepeat: (favorite) => {
+        const filteredFavorites = getStore().favorites.filter((element) => {
+          return element === favorite;
+        });
+        console.log(filteredFavorites.length);
+        if (filteredFavorites.length > 1) {
+          getStore().favorites.pop();
         }
       },
 
-      getType:(favorite)=>{
-       if(typeof(favorite.gender)=="string"){favorite.entity="character"}
-       else{favorite.entity="planet"};
-        console.log(typeof(favorite.gender));
-        console.log(favorite.entity)
+      getType: (favorite) => {
+        if (typeof favorite.gender == "string") {
+          favorite.entity = "character";
+        } else {
+          favorite.entity = "planet";
+        }
+        console.log(typeof favorite.gender);
+        console.log(favorite.entity);
       },
-      
 
+      typeFunction: (targetValue) => {
+        setStore({ userInput: targetValue });
+        console.log(getStore().userInput);
+        let filterTargetValue = getStore().people.filter((element) => {
+          return element.name.toLowerCase().includes(targetValue);
+        });
+        let filterTargetValue2 = getStore().planets.filter((element) => {
+          return element.name.toLowerCase().includes(targetValue);
+        });
+        setStore({ searchBar: filterTargetValue.concat(filterTargetValue2) });
+        console.log(getStore().searchBar);
+      },
+
+      clearSearch: (e) => {
+        setStore({ searchBar: [] });
+        setStore({ userInput: "" });
+      },
 
       removeFavorite: (favorite, index) => {
         const filteredFavorites = getStore().favorites.filter((favorite, i) => {
@@ -74,15 +96,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ favorites: filteredFavorites });
       },
 
-      removeRepeat: (favorite,index) => {
+      removeRepeat: (favorite, index) => {
         const findFavorite = getStore().favorites.find((element) => {
           return element == favorite;
         });
-        if(!findFavorite) console.log(findFavorite);
-     
-      } 
-      ,
-
+        if (!findFavorite) console.log(findFavorite);
+      },
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
