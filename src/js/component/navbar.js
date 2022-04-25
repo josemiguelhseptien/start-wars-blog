@@ -15,9 +15,10 @@ export const Navbar = () => {
             value={store.userInput}
             onChange={(e) => {
               actions.typeFunction(e.target.value);
-            }}
-            className="form-control dropdown-toggle"
+            }}onKeyUp={(e)=>{actions.clearSearch0(e)}}
+            className="form-control"
             placeholder="search"
+            data-bs-toggle="dropdown" aria-expanded="false"
           />
 
           <button
@@ -32,13 +33,13 @@ export const Navbar = () => {
           </button>
         </div>
         <div>
-          <ul className="list-group dropdown-toggle"
+          <ul className="ulList list-group"
          
-          data-bs-toggle="dropdown"
-          aria-expanded="false">
+        
+         >
             {store.searchBar.map((element, index) => {
               return (
-                <li
+                <option
                   className="list-group-item list-group-item-action"
                   key={index}
                   onClick={() => {
@@ -51,7 +52,7 @@ export const Navbar = () => {
                   }}
                 >
                   {element.name}
-                </li>
+                </option>
               );
             })}
           </ul>

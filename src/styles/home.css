@@ -15,3 +15,7 @@
     white-space: nowrap;  
 }
 
+.ulList .dropdown-menu{
+    overflow-y: auto;
+    height: 50px;  
+}

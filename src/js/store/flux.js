@@ -69,7 +69,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
         console.log(typeof favorite.gender);
         console.log(favorite.entity);
+       
       },
+
+      getTypeSearch: (search) => {
+        
+        if (typeof getStore().searchBar.gender == "string") {
+          getStore().searchBar.gender = "character";
+        } else {
+          getStore().searchBar.gender = "planet";
+        }
+        console.log(typeof getStore().searchBar.gender);
+        console.log(getStore().searchBar.gender);
+      },
+
 
       typeFunction: (targetValue) => {
         setStore({ userInput: targetValue });
@@ -87,6 +100,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       clearSearch: (e) => {
         setStore({ searchBar: [] });
         setStore({ userInput: "" });
+      },
+      clearSearch0: (e) => {
+        if(getStore().searchBar.length==0){
+        setStore({ searchBar: [] });
+        ;}
+       
       },
 
       removeFavorite: (favorite, index) => {
